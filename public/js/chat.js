@@ -48,9 +48,13 @@ document.querySelector("#start_chat").addEventListener("click", (event) => {
             }
         });
     });
-    
+
+    // Recebe o socket do admin assim que ele iniciar o atendimento
+    socket.on("admin_send_socket_id", params => {
+        socket_admin_id = params.socket_id;
+    });
+
     socket.on("admin_send_to_client", message => {
-        socket_admin_id = message.socket_id;
         const template_admin = document.getElementById("admin-template").innerHTML;
         const rendered = Mustache.render(template_admin, {
             message_admin: message.text

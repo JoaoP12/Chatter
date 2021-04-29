@@ -20,6 +20,9 @@ socket.on("admin_list_all_users", (connections) => {
 function call(id){
     const connection = connectionsUsers.find(connection => connection.socket_id === id);
 
+    // Requisita que o admin envie seu socket id logo após iniciar o atendimento
+    socket.emit("admin_require_admin_socket_id", { user_id: connection.user_id });
+
     connectionInSupport.push(connection);
     
     const template = document.getElementById("admin_template").innerHTML;
