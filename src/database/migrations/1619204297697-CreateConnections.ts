@@ -47,13 +47,12 @@ export class CreateConnections1619204297697 implements MigrationInterface {
                 referencedColumnNames: ["id"],
                 columnNames: ["user_id"],
                 onDelete: "SET NULL",
-                onUpdate: "SET NULL"
+                onUpdate: "CASCADE"
             })
         );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey("connections", "FKConnectionUser");
         await queryRunner.dropTable("connections");
     }
 
