@@ -13,6 +13,17 @@
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
+    <div class="settings-container">
+      <div id="settings" onclick="showSettings()">
+        <img src="/images/gear.png" alt="settings">
+      </div>
+
+      <div id="option">
+        <input type="button" id="settings-btn" value="Turn Chat Off" onclick="showChatButton()">
+      </div>
+      <div style="font-size: 0.6em;">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </div>
+
     <div class="chat chat_support" id="chat_in_support">
       <div class="in_support_header">
         <span>Em suporte ... </span>
@@ -98,6 +109,10 @@
   <script>
     onLoad();
     const chat = document.getElementById("chat_help");
+    let showSet = true;
+    let showChat = true;
+    document.getElementById("settings").style.cursor = "pointer";
+    showSettings();
 
     function onLoad() {
       fetch("http://localhost:3333/settings/admin").then((result) =>
@@ -109,10 +124,31 @@
         })
       );
     }
-
     function showSettings(){
-
+      const settingsDiv = document.getElementById("option");
+      if(showSet){
+        showSet = false;
+        settingsDiv.style.display = "none";
+        return;
+      }
+      showSet = true;
+      settingsDiv.style.display = "block";
     }
+
+    function showChatButton() {
+      btn_support = document.getElementById("btn_support");
+      btn_chatOnOff = document.getElementById("settings-btn");
+      if(showChat){
+        showChat = false;
+        btn_support.style.display = "none";
+        btn_chatOnOff.value = "Turn Chat On"
+        return;
+      }
+      showChat = true;
+      btn_chatOnOff.value = "Turn Chat Off"
+      btn_support.style.display = "block"
+    }
+
 
     function openChat() {
       chat.style.display = "block";
